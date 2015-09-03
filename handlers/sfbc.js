@@ -44,8 +44,8 @@ var LIBS = {
     // As well, we want to show events which will be starting soon.
     EVENT_WINDOW_BACKWARD   = 86400,    // how far ito the past to load events (seconds)
     EVENT_WINDOW_FORWARD    = 3600,     // how far into the future to load events (seconds)
-    GOOGLEAPI_CLIENT_ID     = '633233832388-ao67h53039nbms0ek8v77h5piqroqk8f.apps.googleusercontent.com',
-    GOOGLEAPI_CLIENT_SECRET = 'HKXinmmuVeZ_dFq8zcbDAFPD',
+    GOOGLEAPI_CLIENT_ID     = process.env.SFBC_CLIENT_ID,
+    GOOGLEAPI_CLIENT_SECRET = process.env.SFBC_CLIENT_SECRET,
     GOOGLEAPI_AUTH_CLIENT;
 
 
