@@ -50,14 +50,20 @@ var LIBS = {
 
 
 function getAuthClient(req) {
+    var local;
     if (! GOOGLEAPI_AUTH_CLIENT) {
+        if (! GOOGLEAPI_CLIENT_ID) {
+            local = require('../local.json');
+            GOOGLEAPI_CLIENT_ID     = local.SFBC_CLIENT_ID;
+            GOOGLEAPI_CLIENT_SECRET = local.SFBC_CLIENT_SECRET;
+        }
         //var secrets = require('../client_secret.json');
         GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.OAuth2(
             //secrets.installed.client_id,
             //secrets.installed.client_secret,
             GOOGLEAPI_CLIENT_ID,
             GOOGLEAPI_CLIENT_SECRET,
-            'http://' + req.headers.host + '/sfbc/google-auth'
+            req.protocol + '://' + req.headers.host + '/sfbc/google-auth'
         );
     }
     return GOOGLEAPI_AUTH_CLIENT;
