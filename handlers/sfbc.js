@@ -63,7 +63,7 @@ function getAuthClient(req) {
             //secrets.installed.client_secret,
             GOOGLEAPI_CLIENT_ID,
             GOOGLEAPI_CLIENT_SECRET,
-            req.protocol + '://' + req.headers.host + '/sfbc/google-auth'
+            'http://' + req.headers.host + '/sfbc/google-auth'
         );
     }
     return GOOGLEAPI_AUTH_CLIENT;
