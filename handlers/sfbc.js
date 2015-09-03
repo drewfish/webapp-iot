@@ -5,10 +5,10 @@ var LIBS = {
         qs:         require('querystring'),
     },
     EVENT_CALENDARS = [
-//      {
-//          name: 'gfr mitras & order members',
-//          ID: 'votlmbd04qtjd4l8to2cfql58g@group.calendar.google.com',
-//      },
+        {
+            name: 'gfr mitras & order members',
+            ID: 'votlmbd04qtjd4l8to2cfql58g@group.calendar.google.com',
+        },
         {
             name: 'intro',
             ID: 't23afoktcn9olosu3mv2qh7u28@group.calendar.google.com',
@@ -33,9 +33,11 @@ var LIBS = {
         },
     ],
     EVENT_FILTERS = [
-        { field: 'summary',  regexp: /ground\s+floor/i, location: 'ground' },
+        // run in order, later ones take precedence over earlier ones
         { field: 'summary',  regexp: /renter/i,         location: 'ground' },
+        { field: 'summary',  regexp: /ground\s+floor/i, location: 'ground' },
         { field: 'summary',  regexp: /annex/i,          location: 'annex' },
+        { field: 'location', regexp: /ground/i,         location: 'ground' },
         { field: 'location', regexp: /annex/i,          location: 'annex' },
     ],
     // The google calendar API isn't really oriented to list events which are currently in
@@ -72,6 +74,24 @@ function getAuthClient(req) {
 //      ground time     unix-epoch, start if free, end if occupied (long)
 //      annex type      0=free, 1=occupied (long)
 //      annex time      unix-epoch, start if free, end if occupied (long)
+// json
+//      {
+//          now:                date
+//          ground: {
+//              free:           boolean
+//              start:          date
+//              end:            date
+//              summary:        text
+//              url:            text
+//          }
+//          annex: {
+//              free:           boolean
+//              start:          date
+//              end:            date
+//              summary:        text
+//              url:            text
+//          }
+//      }
 function events(req, res, next) {
     var api = LIBS.google.calendar('v3'),
         authClient = getAuthClient(req),
@@ -112,7 +132,8 @@ function events(req, res, next) {
             });
         }, function(err) {
             var locations = {}, // location: array of events
-                fields = [],
+                csv = [],
+                json = {},
                 now = Date.now();
             if (err) {
                 res.status(500);
@@ -137,7 +158,8 @@ function events(req, res, next) {
                 }
                 locations[event.sfbc.location].push(event);
             });
-            fields.push(Math.floor(now / 1000));
+            csv.push(Math.floor(now / 1000));
+            json.now = new Date(now).toString();
             ['ground', 'annex'].forEach(function(location) {
                 var events = locations[location] || [],
                     event;
@@ -145,29 +167,49 @@ function events(req, res, next) {
                     return a.sfbc.start.getTime() - b.sfbc.start.getTime();
                 });
                 /*DEBUGGING
-                console.log();
                 console.log(location);
                 events.forEach(function(event) {
-                    console.log(event.sfbc.start, '--', event.sfbc.end, '--', event.summary);
+                    console.log(event.sfbc.start.toString(), '--', event.sfbc.end.toString(), '--', event.summary);
                 });
                 */
                 event = events[0];
                 if (! event) {
-                    fields.push(0);
-                    fields.push(0);
+                    csv.push(0);
+                    csv.push(0);
+                    json[location] = {
+                        free: true,
+                        start: 0,
+                        end: 0,
+                        summary: '',
+                        url: '',
+                    };
                     return;
                 }
-                if (now < event.sfbc.end.getTime()) {
-                    fields.push(1);
-                    fields.push(Math.floor(event.sfbc.end.getTime() / 1000));
+                if (now < event.sfbc.start.getTime()) {
+                    csv.push(0);
+                    csv.push(Math.floor(event.sfbc.start.getTime() / 1000));
+                    json[location] = {
+                        free: true,
+                        start: event.sfbc.start.toString(),
+                        end: event.sfbc.end.toString(),
+                        summary: event.summary,
+                        url: event.htmlLink,
+                    };
                 } else {
-                    fields.push(0);
-                    fields.push(Math.floor(event.sfbc.start.getTime() / 1000));
+                    csv.push(1);
+                    csv.push(Math.floor(event.sfbc.end.getTime() / 1000));
+                    json[location] = {
+                        free: false,
+                        start: event.sfbc.start.toString(),
+                        end: event.sfbc.end.toString(),
+                        summary: event.summary,
+                        url: event.htmlLink,
+                    };
                 }
             });
             res.status(200);
             res.type('text/plain');
-            res.send(fields.join(',') + '\n');
+            res.send(csv.join(',') + '\n' + JSON.stringify(json, null, 4) + '\n');
         });
     });
 }
