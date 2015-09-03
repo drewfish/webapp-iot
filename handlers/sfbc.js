@@ -12,7 +12,7 @@ var LIBS = {
         {
             name: 'intro',
             ID: 't23afoktcn9olosu3mv2qh7u28@group.calendar.google.com',
-            defaultLocation: '1stfloor',
+            defaultLocation: 'ground',
         },
         {
             name: 'mitras & order members',
@@ -21,7 +21,7 @@ var LIBS = {
         {
             name: 'main',
             ID: 'sfbuddhistcenter@gmail.com',
-            defaultLocation: '1stfloor',
+            defaultLocation: 'ground',
         },
         {
             name: 'meetings',
@@ -33,8 +33,8 @@ var LIBS = {
         },
     ],
     EVENT_FILTERS = [
-        { field: 'summary',  regexp: /ground\s+floor/i, location: '1stfloor' },
-        { field: 'summary',  regexp: /renter/i,         location: '1stfloor' },
+        { field: 'summary',  regexp: /ground\s+floor/i, location: 'ground' },
+        { field: 'summary',  regexp: /renter/i,         location: 'ground' },
         { field: 'summary',  regexp: /annex/i,          location: 'annex' },
         { field: 'location', regexp: /annex/i,          location: 'annex' },
     ],
@@ -42,8 +42,7 @@ var LIBS = {
     // progress. We'll work around this by loading events which started within the last
     // day, and filter out those which have in fact ended.
     // As well, we want to show events which will be starting soon.
-    EVENT_WINDOW_BACKWARD   = 86400,    // how far ito the past to load events (seconds)
-    EVENT_WINDOW_FORWARD    = 3600,     // how far into the future to load events (seconds)
+    EVENT_WINDOW            = 86400,    // how far into the past and future to load events (seconds)
     GOOGLEAPI_CLIENT_ID     = process.env.SFBC_CLIENT_ID,
     GOOGLEAPI_CLIENT_SECRET = process.env.SFBC_CLIENT_SECRET,
     GOOGLEAPI_AUTH_CLIENT;
@@ -57,10 +56,7 @@ function getAuthClient(req) {
             GOOGLEAPI_CLIENT_ID     = local.SFBC_CLIENT_ID;
             GOOGLEAPI_CLIENT_SECRET = local.SFBC_CLIENT_SECRET;
         }
-        //var secrets = require('../client_secret.json');
         GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.OAuth2(
-            //secrets.installed.client_id,
-            //secrets.installed.client_secret,
             GOOGLEAPI_CLIENT_ID,
             GOOGLEAPI_CLIENT_SECRET,
             'http://' + req.headers.host + '/sfbc/google-auth'
@@ -72,31 +68,106 @@ function getAuthClient(req) {
 
 // one comma-separated line of fields
 //      current time    unix-epoch (long)
-//      1stfloor        event-status (long)
-//      annex           event-status (long)
-// event-status:
-//      0 if no event
-//      1 if event currently in progress
-//      otherwise, unix-epoch when the event starts
+//      ground type     0=free, 1=occupied (long)
+//      ground time     unix-epoch, start if free, end if occupied (long)
+//      annex type      0=free, 1=occupied (long)
+//      annex time      unix-epoch, start if free, end if occupied (long)
 function events(req, res, next) {
     var api = LIBS.google.calendar('v3'),
-        authClient = getAuthClient(req);
+        authClient = getAuthClient(req),
+        now = Date.now();
     authClient.getAccessToken(function(err, token) {
-        var params = {};
+        var events = [];
         if (! token) {
             console.log('REDIRECTING', '/sfbc/google-auth');
             res.redirect('/sfbc/google-auth');
             return;
         }
-        params.auth = authClient;
-        params.calendarId = 't23afoktcn9olosu3mv2qh7u28@group.calendar.google.com';
-        params.orderBy = 'startTime';
-        params.timeMin = (new Date()).toISOString();
-        params.singleEvents = true;
-        params.maxResults = 3;
-        api.events.list(params, function(err, body) {
+        LIBS.async.each(EVENT_CALENDARS, function(cal, calDone) {
+            var params = {};
+            params.auth = authClient;
+            params.calendarId = cal.ID;
+            params.orderBy = 'startTime';
+            params.timeMin = (new Date(now - (1000 * EVENT_WINDOW))).toISOString();
+            params.timeMax = (new Date(now + (1000 * EVENT_WINDOW))).toISOString();
+            params.singleEvents = true;
+            api.events.list(params, function(err, body) {
+                if (err) {
+                    calDone(err);
+                    return;
+                }
+                body.items.forEach(function(event) {
+                    var location = cal.defaultLocation;
+                    EVENT_FILTERS.forEach(function(filter) {
+                        var val = event[filter.field];
+                        if (val && val.match(filter.regexp)) {
+                            location = filter.location;
+                        }
+                    });
+                    event.sfbc = {};
+                    event.sfbc.location = location;
+                });
+                events = events.concat(body.items);
+                calDone();
+            });
+        }, function(err) {
+            var locations = {}, // location: array of events
+                fields = [],
+                now = Date.now();
+            if (err) {
+                res.status(500);
+                res.send(err);
+                return;
+            }
+            events.forEach(function(event) {
+                var start, end;
+                if (! event.sfbc.location) {
+                    return;
+                }
+                if (!event.start.dateTime || !event.end.dateTime || event.status !== 'confirmed') {
+                    return;
+                }
+                event.sfbc.start = new Date(event.start.dateTime);
+                event.sfbc.end = new Date(event.end.dateTime);
+                if (event.sfbc.end.getTime() < now) {
+                    return;
+                }
+                if (! locations[event.sfbc.location]) {
+                    locations[event.sfbc.location] = [];
+                }
+                locations[event.sfbc.location].push(event);
+            });
+            fields.push(Math.floor(now / 1000));
+            ['ground', 'annex'].forEach(function(location) {
+                var events = locations[location] || [],
+                    event;
+                events = events.sort(function(a, b) {
+                    return a.sfbc.start.getTime() - b.sfbc.start.getTime();
+                });
+                /*DEBUGGING
+                console.log();
+                console.log(location);
+                events.forEach(function(event) {
+                    console.log(event.sfbc.start, '--', event.sfbc.end, '--', event.summary);
+                });
+                */
+                event = events[0];
+                if (! event) {
+                    fields.push(0);
+                    fields.push(0);
+                    return;
+                }
+                if (now < event.sfbc.end.getTime()) {
+                    fields.push(1);
+                    fields.push(Math.floor(event.sfbc.end.getTime() / 1000));
+                } else {
+                    fields.push(0);
+                    fields.push(Math.floor(event.sfbc.start.getTime() / 1000));
+                }
+            });
             res.status(200);
-            res.json(body);
+            res.type('text/plain');
+            res.send(fields.join(',') + '\n');
         });
     });
 }
