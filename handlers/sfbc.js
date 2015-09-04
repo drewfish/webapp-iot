@@ -210,7 +210,7 @@ function events(req, res, next) {
                 csv.push(1);
                 csv.push(Math.floor(event.sfbc.end.getTime() / 1000));
                 json[location] = {
-                    free:       true,
+                    free:       false,
                     start:      LIBS.moment(event.sfbc.start).tz(TIME_TZ).format(TIME_FORMAT),
                     end:        LIBS.moment(event.sfbc.end).tz(TIME_TZ).format(TIME_FORMAT),
                     summary:    event.summary || '',
