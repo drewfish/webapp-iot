@@ -4,6 +4,7 @@ var LIBS = {
         request:    require('request'),
         qs:         require('querystring'),
     },
+    CONFIG,
     EVENT_CALENDARS = [
         {
             name: 'gfr mitras & order members',
@@ -45,36 +46,48 @@ var LIBS = {
     // day, and filter out those which have in fact ended.
     // As well, we want to show events which will be starting soon.
     EVENT_WINDOW            = 86400,    // how far into the past and future to load events (seconds)
-    GOOGLEAPI_CLIENT_ID     = process.env.SFBC_CLIENT_ID,
-    GOOGLEAPI_CLIENT_SECRET = process.env.SFBC_CLIENT_SECRET,
     GOOGLEAPI_AUTH_CLIENT;
 
 
+// make & return the singleton
 function getAuthClient(req) {
-    var local;
     if (! GOOGLEAPI_AUTH_CLIENT) {
-        if (! GOOGLEAPI_CLIENT_ID) {
-            local = require('../local.json');
-            GOOGLEAPI_CLIENT_ID     = local.SFBC_CLIENT_ID;
-            GOOGLEAPI_CLIENT_SECRET = local.SFBC_CLIENT_SECRET;
-        }
-        GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.OAuth2(
-            GOOGLEAPI_CLIENT_ID,
-            GOOGLEAPI_CLIENT_SECRET,
-            'http://' + req.headers.host + '/sfbc/google-auth'
+        GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.JWT(
+            CONFIG.SFBC_GA_EMAIL,
+            __dirname + '/sfbc_ga_key.pem',
+            null,
+            [ 'https://www.googleapis.com/auth/calendar.readonly' ]
         );
     }
     return GOOGLEAPI_AUTH_CLIENT;
 }
 
 
-// one comma-separated line of fields
+// This express middleware will make sure that the auth client has been authorized.
+function authorize(req, res, next) {
+    var authClient = getAuthClient(req);
+    // FUTURE -- no-op if already authorized
+    authClient.authorize(function(err, token) {
+        if (err) {
+            res.status(401);
+            res.type('text/plain');
+            res.send('authentication failed\n' + err.message);
+            return;
+        }
+        authClient.setCredentials(token);
+        next();
+    });
+}
+
+
+// show info about current or next event at the ground floor and annex
+// first line:  comma-separated fields
 //      current time    unix-epoch (long)
 //      ground type     0=free, 1=occupied (long)
 //      ground time     unix-epoch, start if free, end if occupied (long)
 //      annex type      0=free, 1=occupied (long)
 //      annex time      unix-epoch, start if free, end if occupied (long)
-// json
+// the rest:  json
 //      {
 //          now:                date
 //          ground: {
@@ -95,161 +108,123 @@ function getAuthClient(req) {
 function events(req, res, next) {
     var api = LIBS.google.calendar('v3'),
         authClient = getAuthClient(req),
-        now = Date.now();
-    authClient.getAccessToken(function(err, token) {
-        var events = [];
-        if (! token) {
-            console.log('REDIRECTING', '/sfbc/google-auth');
-            res.redirect('/sfbc/google-auth');
-            return;
-        }
-        LIBS.async.each(EVENT_CALENDARS, function(cal, calDone) {
-            var params = {};
-            params.auth = authClient;
-            params.calendarId = cal.ID;
-            params.orderBy = 'startTime';
-            params.timeMin = (new Date(now - (1000 * EVENT_WINDOW))).toISOString();
-            params.timeMax = (new Date(now + (1000 * EVENT_WINDOW))).toISOString();
-            params.singleEvents = true;
-            api.events.list(params, function(err, body) {
-                if (err) {
-                    calDone(err);
-                    return;
-                }
-                body.items.forEach(function(event) {
-                    var location = cal.defaultLocation;
-                    EVENT_FILTERS.forEach(function(filter) {
-                        var val = event[filter.field];
-                        if (val && val.match(filter.regexp)) {
-                            location = filter.location;
-                        }
-                    });
-                    event.sfbc = {};
-                    event.sfbc.location = location;
-                });
-                events = events.concat(body.items);
-                calDone();
-            });
-        }, function(err) {
-            var locations = {}, // location: array of events
-                csv = [],
-                json = {},
-                now = Date.now();
+        now = Date.now(),
+        events = [];
+
+    LIBS.async.each(EVENT_CALENDARS, function(cal, calDone) {
+        var params = {};
+        params.auth = authClient;
+        params.calendarId = cal.ID;
+        params.orderBy = 'startTime';
+        params.timeMin = (new Date(now - (1000 * EVENT_WINDOW))).toISOString();
+        params.timeMax = (new Date(now + (1000 * EVENT_WINDOW))).toISOString();
+        params.singleEvents = true;
+        api.events.list(params, function(err, body) {
             if (err) {
-                res.status(500);
-                res.send(err);
+                calDone(err);
                 return;
             }
+            body.items.forEach(function(event) {
+                var location = cal.defaultLocation;
+                EVENT_FILTERS.forEach(function(filter) {
+                    var val = event[filter.field];
+                    if (val && val.match(filter.regexp)) {
+                        location = filter.location;
+                    }
+                });
+                event.sfbc = {};
+                event.sfbc.location = location;
+            });
+            events = events.concat(body.items);
+            calDone();
+        });
+    }, function(err) {
+        var locations = {}, // location: array of events
+            csv = [],
+            json = {},
+            now = Date.now();
+        if (err) {
+            res.status(500);
+            res.send(err);
+            return;
+        }
+        events.forEach(function(event) {
+            var start, end;
+            if (! event.sfbc.location) {
+                return;
+            }
+            if (!event.start.dateTime || !event.end.dateTime || event.status !== 'confirmed') {
+                return;
+            }
+            event.sfbc.start = new Date(event.start.dateTime);
+            event.sfbc.end = new Date(event.end.dateTime);
+            if (event.sfbc.end.getTime() < now) {
+                return;
+            }
+            if (! locations[event.sfbc.location]) {
+                locations[event.sfbc.location] = [];
+            }
+            locations[event.sfbc.location].push(event);
+        });
+        csv.push(Math.floor(now / 1000));
+        json.now = new Date(now).toString();
+        ['ground', 'annex'].forEach(function(location) {
+            var events = locations[location] || [],
+                event;
+            events = events.sort(function(a, b) {
+                return a.sfbc.start.getTime() - b.sfbc.start.getTime();
+            });
+            /*DEBUGGING
+            console.log(location);
             events.forEach(function(event) {
-                var start, end;
-                if (! event.sfbc.location) {
-                    return;
-                }
-                if (!event.start.dateTime || !event.end.dateTime || event.status !== 'confirmed') {
-                    return;
-                }
-                event.sfbc.start = new Date(event.start.dateTime);
-                event.sfbc.end = new Date(event.end.dateTime);
-                if (event.sfbc.end.getTime() < now) {
-                    return;
-                }
-                if (! locations[event.sfbc.location]) {
-                    locations[event.sfbc.location] = [];
-                }
-                locations[event.sfbc.location].push(event);
+                console.log(event.sfbc.start.toString(), '--', event.sfbc.end.toString(), '--', event.summary);
             });
-            csv.push(Math.floor(now / 1000));
-            json.now = new Date(now).toString();
-            ['ground', 'annex'].forEach(function(location) {
-                var events = locations[location] || [],
-                    event;
-                events = events.sort(function(a, b) {
-                    return a.sfbc.start.getTime() - b.sfbc.start.getTime();
-                });
-                /*DEBUGGING
-                console.log(location);
-                events.forEach(function(event) {
-                    console.log(event.sfbc.start.toString(), '--', event.sfbc.end.toString(), '--', event.summary);
-                });
-                */
-                event = events[0];
-                if (! event) {
-                    csv.push(0);
-                    csv.push(0);
-                    json[location] = {
-                        free: true,
-                        start: 0,
-                        end: 0,
-                        summary: '',
-                        url: '',
-                    };
-                    return;
-                }
-                if (now < event.sfbc.start.getTime()) {
-                    csv.push(0);
-                    csv.push(Math.floor(event.sfbc.start.getTime() / 1000));
-                    json[location] = {
-                        free: true,
-                        start: event.sfbc.start.toString(),
-                        end: event.sfbc.end.toString(),
-                        summary: event.summary,
-                        url: event.htmlLink,
-                    };
-                } else {
-                    csv.push(1);
-                    csv.push(Math.floor(event.sfbc.end.getTime() / 1000));
-                    json[location] = {
-                        free: false,
-                        start: event.sfbc.start.toString(),
-                        end: event.sfbc.end.toString(),
-                        summary: event.summary,
-                        url: event.htmlLink,
-                    };
-                }
-            });
-            res.status(200);
-            res.type('text/plain');
-            res.send(csv.join(',') + '\n' + JSON.stringify(json, null, 4) + '\n');
-        });
-    });
-}
-
-
-function googleAuth(req, res, next) {
-    var authClient = getAuthClient(req),
-        url;
-    if (req.query.code) {
-        authClient.getToken(req.query.code, function(err, token) {
-            if (err) {
-                res.status(500);
-                res.send(err);
+            */
+            event = events[0];
+            if (! event) {
+                csv.push(0);
+                csv.push(0);
+                json[location] = {
+                    free: true,
+                    start: 0,
+                    end: 0,
+                    summary: '',
+                    url: '',
+                };
                 return;
             }
-            authClient.credentials = token;
-            console.log('REDIRECTING', '/sfbc/events');
-            res.redirect('/sfbc/events');
+            if (now < event.sfbc.start.getTime()) {
+                csv.push(0);
+                csv.push(Math.floor(event.sfbc.start.getTime() / 1000));
+                json[location] = {
+                    free: true,
+                    start: event.sfbc.start.toString(),
+                    end: event.sfbc.end.toString(),
+                    summary: event.summary,
+                    url: event.htmlLink,
+                };
+            } else {
+                csv.push(1);
+                csv.push(Math.floor(event.sfbc.end.getTime() / 1000));
+                json[location] = {
+                    free: false,
+                    start: event.sfbc.start.toString(),
+                    end: event.sfbc.end.toString(),
+                    summary: event.summary,
+                    url: event.htmlLink,
+                };
+            }
         });
-        return;
-    }
-    authClient.getAccessToken(function(err, token) {
-        if (token) {
-            console.log('REDIRECTING', '/sfbc/events');
-            res.redirect('/sfbc/events');
-            return;
-        }
-        url = authClient.generateAuthUrl({
-            access_type: 'offline',
-            scope: 'https://www.googleapis.com/auth/calendar.readonly',
-        });
-        console.log('REDIRECTING', url);
-        res.redirect(url);
+        res.status(200);
+        res.type('text/plain');
+        res.send(csv.join(',') + '\n' + JSON.stringify(json, null, 4) + '\n');
     });
 }
 
 
-module.exports.init = function init(app) {
-    app.get('/sfbc/events', events);
-    app.get('/sfbc/google-auth', googleAuth);
+module.exports.init = function init(app, config) {
+    CONFIG = config;
+    app.get('/sfbc/events', authorize, events);
 };
 
 

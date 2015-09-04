@@ -3,7 +3,10 @@
 var LIBS = {
         express:    require('express'),
     },
-    HANDLERS = require(__dirname + '/handlers');
+    HANDLERS = {
+        sfbc:       require('./handlers/sfbc.js'),
+    },
+    CONFIG = require('./config.js');
 
 
 function main(args) {
@@ -13,7 +16,7 @@ function main(args) {
         console.log('----------------------------------------', req.url);
         next();
     });
-    HANDLERS.sfbc.init(app);
+    HANDLERS.sfbc.init(app, CONFIG);
     app.listen(app.get('port'), function() {
           console.log('listening on port', app.get('port'));
     });
