@@ -1,5 +1,3 @@
-
-
 var LIBS = {
         express:    require('express'),
     },
@@ -9,7 +7,7 @@ var LIBS = {
     CONFIG = require('./config.js');
 
 
-function main(args) {
+function main() {
     var app = LIBS.express();
     app.set('port', CONFIG.PORT);
     app.use(function(req, res, next) {
@@ -22,6 +20,6 @@ function main(args) {
     });
 
 }
-main(process.argv.slice(2));
+main();
 
 

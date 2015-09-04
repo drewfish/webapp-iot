@@ -47,6 +47,7 @@ var LIBS = {
     // day, and filter out those which have in fact ended.
     // As well, we want to show events which will be starting soon (within a day).
     EVENT_WINDOW_MS = 86400000,     // how far into the past and future to load events (milliseconds)
+    GOOGLEAPI_KEY_FILE = __dirname + '/sfbc_ga_key.pem',
     GOOGLEAPI_AUTH_CLIENT;
 
 
@@ -55,7 +56,7 @@ function getAuthClient(req) {
     if (! GOOGLEAPI_AUTH_CLIENT) {
         GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.JWT(
             CONFIG.SFBC_GA_EMAIL,
-            __dirname + '/sfbc_ga_key.pem',
+            GOOGLEAPI_KEY_FILE,
             null,
             [ 'https://www.googleapis.com/auth/calendar.readonly' ]
         );
