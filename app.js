@@ -11,7 +11,7 @@ var LIBS = {
 
 function main(args) {
     var app = LIBS.express();
-    app.set('port', (process.env.PORT || 5000));
+    app.set('port', CONFIG.PORT);
     app.use(function(req, res, next) {
         console.log('----------------------------------------', req.url);
         next();

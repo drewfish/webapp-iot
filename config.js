@@ -4,9 +4,8 @@
 
 
 var DEFAULTS = {
-        'SFBC_CLIENT_ID': '',
-        'SFBC_CLIENT_SECRET': '',
-        'SFBC_GA_EMAIL': '',
+        'PORT':             5000,
+        'SFBC_GA_EMAIL':    '',
     },
     LOCAL = {};
 

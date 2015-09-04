@@ -1,10 +1,11 @@
 var LIBS = {
-        async:      require('async'),
-        google:     require('googleapis'),
-        request:    require('request'),
-        qs:         require('querystring'),
+        async:  require('async'),
+        google: require('googleapis'),
+        moment: require('moment-timezone'),
     },
     CONFIG,
+    TIME_TZ     = 'America/Los_Angeles',
+    TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss [GMT]ZZ',
     EVENT_CALENDARS = [
         {
             name: 'gfr mitras & order members',
@@ -44,8 +45,8 @@ var LIBS = {
     // The google calendar API isn't really oriented to list events which are currently in
     // progress. We'll work around this by loading events which started within the last
     // day, and filter out those which have in fact ended.
-    // As well, we want to show events which will be starting soon.
-    EVENT_WINDOW            = 86400,    // how far into the past and future to load events (seconds)
+    // As well, we want to show events which will be starting soon (within a day).
+    EVENT_WINDOW_MS = 86400000,     // how far into the past and future to load events (milliseconds)
     GOOGLEAPI_AUTH_CLIENT;
 
 
@@ -116,8 +117,8 @@ function events(req, res, next) {
         params.auth = authClient;
         params.calendarId = cal.ID;
         params.orderBy = 'startTime';
-        params.timeMin = (new Date(now - (1000 * EVENT_WINDOW))).toISOString();
-        params.timeMax = (new Date(now + (1000 * EVENT_WINDOW))).toISOString();
+        params.timeMin = (new Date(now - EVENT_WINDOW_MS)).toISOString();
+        params.timeMax = (new Date(now + EVENT_WINDOW_MS)).toISOString();
         params.singleEvents = true;
         api.events.list(params, function(err, body) {
             if (err) {
@@ -132,6 +133,7 @@ function events(req, res, next) {
                         location = filter.location;
                     }
                 });
+                // we'll store all our additions to the event in this object
                 event.sfbc = {};
                 event.sfbc.location = location;
             });
@@ -139,17 +141,16 @@ function events(req, res, next) {
             calDone();
         });
     }, function(err) {
-        var locations = {}, // location: array of events
+        var locations = {},     // location: array of events
             csv = [],
             json = {},
-            now = Date.now();
+            now = Date.now();   // update, since API calls might have taken some time
         if (err) {
             res.status(500);
             res.send(err);
             return;
         }
         events.forEach(function(event) {
-            var start, end;
             if (! event.sfbc.location) {
                 return;
             }
@@ -159,6 +160,7 @@ function events(req, res, next) {
             event.sfbc.start = new Date(event.start.dateTime);
             event.sfbc.end = new Date(event.end.dateTime);
             if (event.sfbc.end.getTime() < now) {
+                // event has already ended
                 return;
             }
             if (! locations[event.sfbc.location]) {
@@ -167,7 +169,7 @@ function events(req, res, next) {
             locations[event.sfbc.location].push(event);
         });
         csv.push(Math.floor(now / 1000));
-        json.now = new Date(now).toString();
+        json.now = LIBS.moment(now).tz(TIME_TZ).format(TIME_FORMAT);
         ['ground', 'annex'].forEach(function(location) {
             var events = locations[location] || [],
                 event;
@@ -197,21 +199,21 @@ function events(req, res, next) {
                 csv.push(0);
                 csv.push(Math.floor(event.sfbc.start.getTime() / 1000));
                 json[location] = {
-                    free: true,
-                    start: event.sfbc.start.toString(),
-                    end: event.sfbc.end.toString(),
-                    summary: event.summary,
-                    url: event.htmlLink,
+                    free:       true,
+                    start:      LIBS.moment(event.sfbc.start).tz(TIME_TZ).format(TIME_FORMAT),
+                    end:        LIBS.moment(event.sfbc.end).tz(TIME_TZ).format(TIME_FORMAT),
+                    summary:    event.summary || '',
+                    url:        event.htmlLink || '',
                 };
             } else {
                 csv.push(1);
                 csv.push(Math.floor(event.sfbc.end.getTime() / 1000));
                 json[location] = {
-                    free: false,
-                    start: event.sfbc.start.toString(),
-                    end: event.sfbc.end.toString(),
-                    summary: event.summary,
-                    url: event.htmlLink,
+                    free:       true,
+                    start:      LIBS.moment(event.sfbc.start).tz(TIME_TZ).format(TIME_FORMAT),
+                    end:        LIBS.moment(event.sfbc.end).tz(TIME_TZ).format(TIME_FORMAT),
+                    summary:    event.summary || '',
+                    url:        event.htmlLink || '',
                 };
             }
         });
