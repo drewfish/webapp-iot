@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style><![CDATA[
+        svg.page {
+            page-break-inside: avoid;
+            page-break-after: always;
+        }
+    ]]></style>
+</head>
+<body>
+{{~it.pages :page:p}}
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    width="100%"
+    viewBox="0 0 800 900"
+    class="page"
+    >
+
+    <defs>
+        <style><![CDATA[
+            text {
+                font-family: Arial, sans-serif;
+                text-anchor: middle;
+            }
+            symbol {
+                overflow: visible;
+            }
+            .background {
+                fill: #FFF;
+                stroke: none;
+            }
+            .cut {
+                fill: none;
+                stroke: #000;
+                stroke-width: 1;
+            }
+            .fold {
+                fill: none;
+                stroke: #BBB;
+                stroke-width: 1;
+            }
+            .bar {
+                stroke: none;
+                stroke-width: 1;
+            }
+            rect.Bk { fill: #000000; stroke: #000000; }
+            rect.Bn { fill: #705000; stroke: #705000; }
+            rect.Rd { fill: #E54444; stroke: #E54444; }
+            rect.Og { fill: #FC8810; stroke: #FC8810; }
+            rect.Yw { fill: #EEEE00; stroke: #EEEE00; }
+            rect.Gn { fill: #00A000; stroke: #00A000; }
+            rect.Bl { fill: #0000FF; stroke: #0000FF; }
+            rect.Vt { fill: #C050DD; stroke: #C050DD; }
+            rect.Gy { fill: #AAAAAA; stroke: #AAAAAA; }
+            rect.Wt { fill: #FFFFFF; stroke: #AAAAAA; }
+            rect.Gd { fill: #E0D000; stroke: #AAAAAA; }
+            rect.Sr { fill: #DDDDDD; stroke: #AAAAAA; }
+            symbol.box rect { stroke-width: 2; }
+            symbol.box.Bk text { fill: #BBBBBB; stroke: none; }
+            symbol.box.Bn text { fill: #BBBBBB; stroke: none; }
+            symbol.box.Bl text { fill: #BBBBBB; stroke: none; }
+            symbol.box.multiplier tspan { baseline-shift: 4pt; }
+        ]]></style>
+
+        <symbol id="hbar-Sr"><rect class="bar Sr" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Gd"><rect class="bar Gd" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Bk"><rect class="bar Bk" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Bn"><rect class="bar Bn" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Rd"><rect class="bar Rd" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Og"><rect class="bar Og" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Yw"><rect class="bar Yw" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Gn"><rect class="bar Gn" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Bl"><rect class="bar Bl" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Vt"><rect class="bar Vt" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Gy"><rect class="bar Gy" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+        <symbol id="hbar-Wt"><rect class="bar Wt" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
+
+        <symbol id="vbar-Sr"><rect class="bar Sr" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Gd"><rect class="bar Gd" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Bk"><rect class="bar Bk" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Bn"><rect class="bar Bn" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Rd"><rect class="bar Rd" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Og"><rect class="bar Og" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Yw"><rect class="bar Yw" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Gn"><rect class="bar Gn" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Bl"><rect class="bar Bl" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Vt"><rect class="bar Vt" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Gy"><rect class="bar Gy" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+        <symbol id="vbar-Wt"><rect class="bar Wt" x="0" y="0" width="5" height="30" rx="2" ry="2"/></symbol>
+
+        <symbol id="box-digit-Bk" class="box digit Bk">
+            <rect class="Bk" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">0</text>
+        </symbol>
+        <symbol id="box-digit-Bn" class="box digit Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">1</text>
+        </symbol>
+        <symbol id="box-digit-Rd" class="box digit Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">2</text>
+        </symbol>
+        <symbol id="box-digit-Og" class="box digit Og">
+            <rect class="Og" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">3</text>
+        </symbol>
+        <symbol id="box-digit-Yw" class="box digit Yw">
+            <rect class="Yw" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">4</text>
+        </symbol>
+        <symbol id="box-digit-Gn" class="box digit Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">5</text>
+        </symbol>
+        <symbol id="box-digit-Bl" class="box digit Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">6</text>
+        </symbol>
+        <symbol id="box-digit-Vt" class="box digit Vt">
+            <rect class="Vt" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">7</text>
+        </symbol>
+        <symbol id="box-digit-Gy" class="box digit Gy">
+            <rect class="Gy" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">8</text>
+        </symbol>
+        <symbol id="box-digit-Wt" class="box digit Wt">
+            <rect class="Wt" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="18pt">9</text>
+        </symbol>
+
+        <symbol id="box-multiplier-Sr" class="box multiplier Sr">
+            <rect class="Sr" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">-2</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gd" class="box multiplier Gd">
+            <rect class="Gd" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">-1</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bk" class="box multiplier Bk">
+            <rect class="Bk" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">0</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bn" class="box multiplier Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">1</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Rd" class="box multiplier Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">2</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Og" class="box multiplier Og">
+            <rect class="Og" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">3</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Yw" class="box multiplier Yw">
+            <rect class="Yw" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">4</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gn" class="box multiplier Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">5</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bl" class="box multiplier Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">6</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Vt" class="box multiplier Vt">
+            <rect class="Vt" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">7</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gy" class="box multiplier Gy">
+            <rect class="Gy" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">8</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Wt" class="box multiplier Wt">
+            <rect class="Wt" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">9</tspan></text>
+        </symbol>
+
+        <symbol id="box-tolerance-Sr" class="box tolerance Sr">
+            <rect class="Sr" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">10<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Gd" class="box tolerance Gd">
+            <rect class="Gd" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">5<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Bn" class="box tolerance Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">1<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Rd" class="box tolerance Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">2<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Gn" class="box tolerance Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">½<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Bl" class="box tolerance Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"/>
+            <text x="15" y="24" font-size="10pt">¼<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+    </defs>
+
+    <rect class="background" x="0" y="0" width="800" height="900" viewBox="0 0 800 900"/>
+
+    <line class="cut" x1="1" x2="1" y1="1" y2="899" />
+    <line class="cut" x1="400" x2="400" y1="1" y2="899" />
+    <line class="cut" x1="799" x2="799" y1="1" y2="899" />
+    <line class="cut" x1="1" x2="799" y1="1" y2="1" />
+    <line class="cut" x1="1" x2="799" y1="300" y2="300" />
+    <line class="cut" x1="1" x2="799" y1="600" y2="600" />
+    <line class="cut" x1="1" x2="799" y1="899" y2="899" />
+
+    <line class="fold" x1="37.5" x2="37.5" y1="1" y2="899" />
+    <line class="fold" x1="362.5" x2="362.5" y1="1" y2="899" />
+    <line class="fold" x1="437.5" x2="437.5" y1="1" y2="899" />
+    <line class="fold" x1="762.5" x2="762.5" y1="1" y2="899" />
+    <line class="fold" x1="1" x2="799" y1="100" y2="100" />
+    <line class="fold" x1="1" x2="799" y1="200" y2="200" />
+    <line class="fold" x1="1" x2="799" y1="400" y2="400" />
+    <line class="fold" x1="1" x2="799" y1="500" y2="500" />
+    <line class="fold" x1="1" x2="799" y1="700" y2="700" />
+    <line class="fold" x1="1" x2="799" y1="800" y2="800" />
+
+{{~page.envelopes :env:e}}
+    <!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
+    <text x="{{=env.leaf1cx}}" y="{{=env.leaf1cy + 10}}" font-size="24pt" transform="rotate(180 {{=env.leaf1cx}},{{=env.leaf1cy}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>
+    <text x="{{=env.leaf2cx}}" y="{{=env.leaf2cy + 10}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>{{~it.digits :off:d}}
+    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.digits[d]}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
+    <use x="{{=env.leaf0cx + it.boxes.digits[d]}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-digit-{{=env.ui.digits[d]}}" />{{~}}
+    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.mult}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.mult}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.mult}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.mult}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
+    <use x="{{=env.leaf0cx + it.boxes.mult}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-multiplier-{{=env.ui.mult}}" />{{? it.config.tolerance}}
+    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.tol}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.tol}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.tol}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.tol}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
+    <use x="{{=env.leaf0cx + it.boxes.tol}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-tolerance-{{=it.config.tol}}" />{{?}}
+{{~}}
+</svg>
+{{~}}
+</body>
+</html>

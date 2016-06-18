@@ -2,7 +2,8 @@ var LIBS = {
         express:    require('express'),
     },
     HANDLERS = {
-        sfbc:       require('./handlers/sfbc.js'),
+        ee:     require('./handlers/ee'),
+        sfbc:   require('./handlers/sfbc'),
     },
     CONFIG = require('./config.js');
 
@@ -14,6 +15,7 @@ function main() {
         console.log('----------------------------------------', req.url);
         next();
     });
+    HANDLERS.ee.init(app, CONFIG);
     HANDLERS.sfbc.init(app, CONFIG);
     app.listen(app.get('port'), function() {
           console.log('listening on port', app.get('port'));

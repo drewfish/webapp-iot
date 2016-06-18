@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<style>
+    body { margin: 1em; }
+    th, td { vertical-align: top; }
+    #res-values { width: 30em; height: 4em; }
+    #res-row-submit { text-align: center; }
+</style>
+<script>
+function resistors() {
+    var form = document.forms.res,
+        bands = form.bands.value || 4,
+        tol = form.tol.value || 'n',
+        vals = form.vals.value || '',
+        url = '/ee/envelopes/resistors/',
+        errs = [];
+    url += 'b=' + encodeURIComponent(bands);
+    if (tol !== 'n') {
+        url += '&t=' + encodeURIComponent(tol);
+    }
+    vals = vals.replace(/[^0-9rkm.]/gi, ',');
+    vals = vals.replace(/,+/g, ',').replace(/^,+/, '').replace(/,+$/, '');
+    vals = vals ? vals.split(',') : [];
+    if (! vals.length) {
+        return;
+    }
+    vals = vals.map(function(val) {
+        var matches;
+        matches = val.match(/^(\d+)([rkm])(\d+)$/i);
+        if (matches) {
+            val =  matches[1] + '.' + matches[3] + matches[2];
+        }
+        matches = val.match(/^\d+(\.\d+)?([rkm])?$/i);
+        if (! matches) {
+            errs.push(val);
+        }
+        val = val.replace(/r$/i, '');
+        return val;
+    });
+    if (errs.length) {
+        alert('invalid values: ' + errs.join(' '));
+        return;
+    }
+    url += '/' + vals;
+    window.location.href = url;
+}
+</script>
+</head>
+<body>
+
+<p>
+    Paper envelopes for organizing components.
+</p>
+
+
+<h2>instructions</h2>
+<ol>
+    <li>configure and click "draw"</li>
+    <li>print so that each image is printed on a separate page (hopefully does this automatically)</li>
+    <li>cut on black lines, fold on grey lines</li>
+</ol>
+
+
+<h2>resistors</h2>
+<form id="res" class="pure-form" onsubmit="resistors(); return false">
+<table class="pure-table pure-table-horizontal">
+    <tbody>
+        <tr>
+            <th>tolerance</th>
+            <td>
+                <label for="res-tol-5"><input id="res-tol-5" type="radio" name="tol" value="5" checked> 5%</label>
+                <label for="res-tol-2"><input id="res-tol-2" type="radio" name="tol" value="2"> 2%</label>
+                <label for="res-tol-1"><input id="res-tol-1" type="radio" name="tol" value="1"> 1%</label>
+                <label for="res-tol-n"><input id="res-tol-n" type="radio" name="tol" value="n"> none</label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>bands</th>
+            <td>
+                <label for="res-bands-4"><input id="res-bands-4" type="radio" name="bands" value="4" checked> 4</label>
+                <label for="res-bands-5"><input id="res-bands-5" type="radio" name="bands" value="5"> 5</label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>values</th>
+            <td>
+                <textarea id="res-values" name="vals"></textarea>
+            </td>
+            <td>
+                comma or space separated list of resistor values <br>
+                use <code>k</code> and <code>M</code> to specify magnitude
+            </td>
+        </tr>
+        <tr id="res-row-submit">
+            <td colspan="3">
+                <button class="pure-button pure-button-primary" type="submit">draw</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</form>
+
+</body>
+</html>
