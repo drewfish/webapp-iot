@@ -232,32 +232,17 @@
     <!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
     <text x="{{=env.leaf1cx}}" y="{{=env.leaf1cy + 10}}" font-size="24pt" transform="rotate(180 {{=env.leaf1cx}},{{=env.leaf1cy}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>
     <text x="{{=env.leaf2cx}}" y="{{=env.leaf2cy + 10}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>{{~it.digits :off:d}}
-    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
-    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.digits[d]}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
     <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
-    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
     <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
-    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
     <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
-    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
     <use x="{{=env.leaf0cx + it.boxes.digits[d]}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-digit-{{=env.ui.digits[d]}}" />{{~}}
-    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.mult}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
-    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.mult}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
     <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.mult}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
-    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.mult}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.mult}}" />
     <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
-    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
     <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
-    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.mult}}" xlink:href="#hbar-{{=env.ui.mult}}" />
     <use x="{{=env.leaf0cx + it.boxes.mult}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-multiplier-{{=env.ui.mult}}" />{{? it.config.tolerance}}
-    <use x="{{=env.leaf1W + it.config.barMargin + it.vbars.W.tol}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
-    <use x="{{=env.leaf1E - it.config.barMargin + it.vbars.E.tol}}" y="{{=env.leaf1N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
     <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.tol}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
-    <use x="{{=env.leaf2E - it.config.barMargin + it.vbars.E.tol}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=it.config.tol}}" />
     <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
-    <use x="{{=env.leaf1E - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
     <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
-    <use x="{{=env.leaf2E - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.tol}}" xlink:href="#hbar-{{=it.config.tol}}" />
     <use x="{{=env.leaf0cx + it.boxes.tol}}" y="{{=env.leaf0cy - 15}}" xlink:href="#box-tolerance-{{=it.config.tol}}" />{{?}}
 {{~}}
 </svg>
