@@ -4,9 +4,15 @@
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 <style>
     body { margin: 1em; }
-    th, td { vertical-align: top; }
+    table { border-collapse: collapse; }
+    tr { border: 1px solid #cbcbcb; }
+    tr tr { border: none; }
+    th, td {
+        padding:0.5em 1em;
+        vertical-align: top;
+    }
     #res-values { width: 30em; height: 4em; }
-    #res-row-submit { text-align: center; }
+    .spanned { text-align: center; }
 </style>
 <script>
 function resistors() {
@@ -55,54 +61,64 @@ function resistors() {
 </p>
 
 
-<h2>instructions</h2>
-<ol>
-    <li>configure and click "draw"</li>
-    <li>print so that each image is printed on a separate page (hopefully does this automatically)</li>
-    <li>cut on black lines, fold on grey lines</li>
-</ol>
-
-
 <h2>resistors</h2>
 <form id="res" class="pure-form" onsubmit="resistors(); return false">
-<table class="pure-table pure-table-horizontal">
-    <tbody>
-        <tr>
-            <th>tolerance</th>
-            <td>
-                <label for="res-tol-5"><input id="res-tol-5" type="radio" name="tol" value="5" checked> 5%</label>
-                <label for="res-tol-2"><input id="res-tol-2" type="radio" name="tol" value="2"> 2%</label>
-                <label for="res-tol-1"><input id="res-tol-1" type="radio" name="tol" value="1"> 1%</label>
-                <label for="res-tol-n"><input id="res-tol-n" type="radio" name="tol" value="n"> none</label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>bands</th>
-            <td>
-                <label for="res-bands-4"><input id="res-bands-4" type="radio" name="bands" value="4" checked> 4</label>
-                <label for="res-bands-5"><input id="res-bands-5" type="radio" name="bands" value="5"> 5</label>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>values</th>
-            <td>
-                <textarea id="res-values" name="vals"></textarea>
-            </td>
-            <td>
-                comma or space separated list of resistor values <br>
-                use <code>k</code> and <code>M</code> to specify magnitude
-            </td>
-        </tr>
-        <tr id="res-row-submit">
-            <td colspan="3">
-                <button class="pure-button pure-button-primary" type="submit">draw</button>
-            </td>
-        </tr>
-    </tbody>
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <th>tolerance</th>
+                    <td>
+                        <label for="res-tol-5"><input id="res-tol-5" type="radio" name="tol" value="5" checked> 5%</label>
+                        <label for="res-tol-2"><input id="res-tol-2" type="radio" name="tol" value="2"> 2%</label>
+                        <label for="res-tol-1"><input id="res-tol-1" type="radio" name="tol" value="1"> 1%</label>
+                        <label for="res-tol-n"><input id="res-tol-n" type="radio" name="tol" value="n"> none</label>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>bands</th>
+                    <td>
+                        <label for="res-bands-4"><input id="res-bands-4" type="radio" name="bands" value="4" checked> 4</label>
+                        <label for="res-bands-5"><input id="res-bands-5" type="radio" name="bands" value="5"> 5</label>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>values</th>
+                    <td>
+                        <textarea id="res-values" name="vals"></textarea>
+                    </td>
+                    <td>
+                        comma or space separated list of resistor values <br>
+                        use <code>k</code> and <code>M</code> to specify magnitude
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="spanned">
+        <td>
+            <button class="pure-button pure-button-primary" type="submit">draw</button>
+        </td>
+    </tr>
+    <tr class="spanned">
+        <td>
+            print so that each image (of 6 envelopes) is printed on a separate page<br>
+            (hopefully this happens automatically)
+        </td>
+    </tr>
+    <tr class="spanned">
+        <td>
+            cut on black lines<br>
+            fold on grey lines<br>
+            <img src="/ee/envelopes/resistors/how-to-fold.svg" width="480" height="95" />
+        </td>
+    </tr>
 </table>
 </form>
+
 
 </body>
 </html>

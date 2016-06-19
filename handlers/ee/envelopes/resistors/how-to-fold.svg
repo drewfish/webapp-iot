@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    width="480"
+    height="95"
+    >
+
+    <defs>
+        <style><![CDATA[
+            text {
+                font-family: Arial, sans-serif;
+                text-anchor: middle;
+            }
+            symbol {
+                overflow: visible;
+            }
+            .background {
+                fill: #FFF;
+                stroke: none;
+            }
+            .cut {
+                fill: none;
+                stroke: #000;
+                stroke-width: 1;
+            }
+            .fold {
+                fill: none;
+                stroke: #BBB;
+                stroke-width: 1;
+            }
+            .bar {
+                stroke: none;
+                stroke-width: 1;
+            }
+            rect.Bk { fill: #000000; stroke: #000000; }
+            rect.Bn { fill: #705000; stroke: #705000; }
+            rect.Rd { fill: #E54444; stroke: #E54444; }
+            rect.Og { fill: #FC8810; stroke: #FC8810; }
+            rect.Yw { fill: #EEEE00; stroke: #EEEE00; }
+            rect.Gn { fill: #00A000; stroke: #00A000; }
+            rect.Bl { fill: #0000FF; stroke: #0000FF; }
+            rect.Vt { fill: #C050DD; stroke: #C050DD; }
+            rect.Gy { fill: #AAAAAA; stroke: #AAAAAA; }
+            rect.Wt { fill: #FFFFFF; stroke: #AAAAAA; }
+            rect.Gd { fill: #E0D000; stroke: #AAAAAA; }
+            rect.Sr { fill: #DDDDDD; stroke: #AAAAAA; }
+            symbol.box rect { stroke-width: 2; }
+            symbol.box.Bk text { fill: #BBBBBB; stroke: none; }
+            symbol.box.Bn text { fill: #BBBBBB; stroke: none; }
+            symbol.box.Bl text { fill: #BBBBBB; stroke: none; }
+            symbol.box.multiplier tspan { baseline-shift: 4pt; }
+            rect.paper {
+                fill: #FFF;
+                stroke: #000;
+                stroke-width: 0.25;
+            }
+        ]]></style>
+
+        <symbol id="hbar-Sr"><rect class="bar Sr" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Gd"><rect class="bar Gd" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Bk"><rect class="bar Bk" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Bn"><rect class="bar Bn" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Rd"><rect class="bar Rd" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Og"><rect class="bar Og" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Yw"><rect class="bar Yw" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Gn"><rect class="bar Gn" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Bl"><rect class="bar Bl" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Vt"><rect class="bar Vt" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Gy"><rect class="bar Gy" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+        <symbol id="hbar-Wt"><rect class="bar Wt" x="0" y="0" width="30" height="5" rx="2" ry="2"></rect></symbol>
+
+        <symbol id="vbar-Sr"><rect class="bar Sr" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Gd"><rect class="bar Gd" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Bk"><rect class="bar Bk" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Bn"><rect class="bar Bn" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Rd"><rect class="bar Rd" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Og"><rect class="bar Og" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Yw"><rect class="bar Yw" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Gn"><rect class="bar Gn" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Bl"><rect class="bar Bl" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Vt"><rect class="bar Vt" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Gy"><rect class="bar Gy" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+        <symbol id="vbar-Wt"><rect class="bar Wt" x="0" y="0" width="5" height="30" rx="2" ry="2"></rect></symbol>
+
+        <symbol id="box-digit-Bk" class="box digit Bk">
+            <rect class="Bk" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">0</text>
+        </symbol>
+        <symbol id="box-digit-Bn" class="box digit Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">1</text>
+        </symbol>
+        <symbol id="box-digit-Rd" class="box digit Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">2</text>
+        </symbol>
+        <symbol id="box-digit-Og" class="box digit Og">
+            <rect class="Og" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">3</text>
+        </symbol>
+        <symbol id="box-digit-Yw" class="box digit Yw">
+            <rect class="Yw" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">4</text>
+        </symbol>
+        <symbol id="box-digit-Gn" class="box digit Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">5</text>
+        </symbol>
+        <symbol id="box-digit-Bl" class="box digit Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">6</text>
+        </symbol>
+        <symbol id="box-digit-Vt" class="box digit Vt">
+            <rect class="Vt" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">7</text>
+        </symbol>
+        <symbol id="box-digit-Gy" class="box digit Gy">
+            <rect class="Gy" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">8</text>
+        </symbol>
+        <symbol id="box-digit-Wt" class="box digit Wt">
+            <rect class="Wt" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="18pt">9</text>
+        </symbol>
+
+        <symbol id="box-multiplier-Sr" class="box multiplier Sr">
+            <rect class="Sr" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">-2</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gd" class="box multiplier Gd">
+            <rect class="Gd" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">-1</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bk" class="box multiplier Bk">
+            <rect class="Bk" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">0</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bn" class="box multiplier Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">1</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Rd" class="box multiplier Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">2</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Og" class="box multiplier Og">
+            <rect class="Og" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">3</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Yw" class="box multiplier Yw">
+            <rect class="Yw" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">4</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gn" class="box multiplier Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">5</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Bl" class="box multiplier Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">6</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Vt" class="box multiplier Vt">
+            <rect class="Vt" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">7</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Gy" class="box multiplier Gy">
+            <rect class="Gy" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">8</tspan></text>
+        </symbol>
+        <symbol id="box-multiplier-Wt" class="box multiplier Wt">
+            <rect class="Wt" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="6pt">10<tspan font-size="14pt">9</tspan></text>
+        </symbol>
+
+        <symbol id="box-tolerance-Sr" class="box tolerance Sr">
+            <rect class="Sr" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">10<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Gd" class="box tolerance Gd">
+            <rect class="Gd" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">5<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Bn" class="box tolerance Bn">
+            <rect class="Bn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">1<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Rd" class="box tolerance Rd">
+            <rect class="Rd" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">2<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Gn" class="box tolerance Gn">
+            <rect class="Gn" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">½<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="box-tolerance-Bl" class="box tolerance Bl">
+            <rect class="Bl" x="0" y="0" width="30" height="30"></rect>
+            <text x="15" y="24" font-size="10pt">¼<tspan font-size="6pt">%</tspan></text>
+        </symbol>
+        <symbol id="envelope">
+            <rect class="paper" x="0" y="0" width="100" height="75" />
+            <svg width="100" height="75" viewBox="0 0 400 300">
+                <line class="fold" x1="37.5" x2="37.5" y1="1" y2="299" />
+                <line class="fold" x1="362.5" x2="362.5" y1="1" y2="299" />
+                <line class="fold" x1="1" x2="399" y1="100" y2="100" />
+                <line class="fold" x1="1" x2="399" y1="200" y2="200" />
+                <g class="envelope">
+                    <text x="200" y="160" font-size="24pt" transform="rotate(180 200,150)">1M<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <text x="200" y="260" font-size="24pt">1M<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <use x="77.5" y="185" xlink:href="#vbar-Bn"></use>
+                    <use x="22.5" y="130" xlink:href="#hbar-Bn"></use>
+                    <use x="22.5" y="265" xlink:href="#hbar-Bn"></use>
+                    <use x="130" y="35.5" xlink:href="#box-digit-Bn"></use>
+                    <use x="87.5" y="185" xlink:href="#vbar-Bk"></use>
+                    <use x="22.5" y="140" xlink:href="#hbar-Bk"></use>
+                    <use x="22.5" y="255" xlink:href="#hbar-Bk"></use>
+                    <use x="165" y="35.5" xlink:href="#box-digit-Bk"></use>
+                    <use x="97.5" y="185" xlink:href="#vbar-Gn"></use>
+                    <use x="22.5" y="150" xlink:href="#hbar-Gn"></use>
+                    <use x="22.5" y="245" xlink:href="#hbar-Gn"></use>
+                    <use x="200" y="35.5" xlink:href="#box-multiplier-Gn"></use>
+                    <use x="112.5" y="185" xlink:href="#vbar-Gd"></use>
+                    <use x="22.5" y="165" xlink:href="#hbar-Gd"></use>
+                    <use x="22.5" y="230" xlink:href="#hbar-Gd"></use>
+                    <use x="240" y="35.5" xlink:href="#box-tolerance-Gd"></use>
+                </g>
+            </svg>
+        </symbol>
+        <symbol id="envelope-leaf0">
+            <clipPath id="envelope-clip-leaf0">
+                <rect x="9.375" y="0" width="81.25" height="25" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="81.25" height="25" />
+            <use x="0" y="0" transform="translate(-9.375 0)" clip-path="url(#envelope-clip-leaf0)" xlink:href="#envelope" />
+        </symbol>
+        <symbol id="envelope-leaf0-full">
+            <clipPath id="envelope-clip-leaf0-full">
+                <rect x="0" y="0" width="100" height="25" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="100" height="25" />
+            <use x="0" y="0" clip-path="url(#envelope-clip-leaf0-full)" xlink:href="#envelope" />
+        </symbol>
+        <symbol id="envelope-leaf2">
+            <clipPath id="envelope-clip-leaf2">
+                <rect x="9.375" y="50" width="81.25" height="25" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="81.25" height="25" />
+            <use x="0" y="0" transform="translate(-9.375 -50)" clip-path="url(#envelope-clip-leaf2)" xlink:href="#envelope" />
+        </symbol>
+        <symbol id="envelope-bside-leaf12">
+            <rect class="paper" x="0" y="0" width="81.25" height="50" />
+        </symbol>
+        <symbol id="envelope-bside-leaf12-full">
+            <rect class="paper" x="0" y="0" width="100" height="50" />
+        </symbol>
+        <symbol id="envelope-rfold2">
+            <clipPath id="envelope-clip-rfold2">
+                <rect x="90.625" y="50" width="9.375" height="25" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="9.375" height="25" />
+            <use x="0" y="0" transform="translate(-90.625 -50)" clip-path="url(#envelope-clip-rfold2)" xlink:href="#envelope" />
+        </symbol>
+        <symbol id="envelope-lfold12">
+            <clipPath id="envelope-clip-lfold12">
+                <rect x="0" y="25" width="9.375" height="50" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="9.375" height="50" />
+            <line class="fold" x1="0" x2="9.375" y1="25" y2="25" />
+            <use x="0" y="0" transform="translate(0 -25)" clip-path="url(#envelope-clip-lfold12)" xlink:href="#envelope" />
+        </symbol>
+        <symbol id="envelope-rfold12">
+            <clipPath id="envelope-clip-rfold12">
+                <rect x="90.625" y="25" width="9.375" height="50" />
+            </clipPath>
+            <rect class="paper" x="0" y="0" width="9.375" height="50" />
+            <line class="fold" x1="0" x2="9.375" y1="25" y2="25" />
+            <use x="0" y="0" transform="translate(-90.625 -25)" clip-path="url(#envelope-clip-rfold12)" xlink:href="#envelope" />
+        </symbol>
+    </defs>
+
+    <rect class="background" x="0" y="0" width="480" height="95" />
+    <use x="10" y="10" xlink:href="#envelope" />
+    <g id="instructions-step1" x="130" y="10" transform="rotate(-10 180,47.5)">
+        <use x="0" y="0" transform="
+                translate(130 22.5)
+            " xlink:href="#envelope-bside-leaf12-full" />
+        <use x="0" y="0" transform="
+                translate(145 47.5)
+                skewX(-30)
+            " xlink:href="#envelope-leaf0-full" />
+    </g>
+    <g id="instructions-step2"
+    transform="rotate(-10 300,47.5)"
+    >
+        <use x="0" y="0" transform="
+                translate(259.375 22.5)
+            " xlink:href="#envelope-bside-leaf12" />
+        <use x="0" y="0" transform="
+                translate(259.375 47.5)
+            " xlink:href="#envelope-leaf0" />
+        <use x="0" y="0" transform="
+                translate(259.375 22.5)
+                rotate(180 4.6875,25)
+                skewY(30)
+                scale(0.9 1)
+                translate(1.1 -5.4)
+            " xlink:href="#envelope-lfold12" />
+        <use x="0" y="0" transform="
+                translate(332.25 27.5)
+                rotate(180 4.6875,25)
+                skewY(-30)
+                scale(0.9 1)
+                translate(1.1 5.4)
+            " xlink:href="#envelope-rfold12" />
+    </g>
+    <g id="instructions-step3" transform="rotate(-10 420,47.5)">
+        <use x="0" y="0" transform="
+                translate(379.375 35)
+                skewX(-20)
+                scale(1 0.9)
+            " xlink:href="#envelope-rfold2" />
+        <use x="0" y="0" transform="
+                translate(379.375 35)
+            " xlink:href="#envelope-leaf2" />
+    </g>
+
+</svg>

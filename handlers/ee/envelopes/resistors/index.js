@@ -79,7 +79,7 @@ function envelopeUI(val, config) {
 
     if (val >= 1000000) {
         ui.val = (val / 1000000) + 'M';
-    } else if (val > 1000) {
+    } else if (val >= 1000) {
         ui.val = (val / 1000) + 'k';
     } else {
         ui.val = val.toString();
