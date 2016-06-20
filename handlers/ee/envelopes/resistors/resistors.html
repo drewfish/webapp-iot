@@ -221,10 +221,10 @@
     <line class="fold" x1="1" x2="799" y1="800" y2="800" />
 
 {{~page.envelopes :env:e}}
-    <!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
+<!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}}{{? it.config.watt}},{{!it.config.watt}}{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
     <g id="envelope-{{=p}}-{{=env.col}}-{{=env.row}}" class="envelope">
-        <text x="{{=env.leaf1cx}}" y="{{=env.leaf1cy + 10}}" font-size="24pt" transform="rotate(180 {{=env.leaf1cx}},{{=env.leaf1cy}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>
-        <text x="{{=env.leaf2cx}}" y="{{=env.leaf2cy + 10}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}</tspan></text>{{~it.digits :off:d}}
+        <text x="{{=env.leaf1cx}}" y="{{=env.leaf1cy + 10}}" font-size="24pt" transform="rotate(180 {{=env.leaf1cx}},{{=env.leaf1cy}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>
+        <text x="{{=env.leaf2cx}}" y="{{=env.leaf2cy + 10}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>{{~it.digits :off:d}}
         <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />

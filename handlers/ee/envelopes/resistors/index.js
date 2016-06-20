@@ -51,6 +51,11 @@ var ME = module.exports,
         '2':    'Rd',
         '5':    'Gd',
         '50':   'Sr',
+    },
+    UI_WATTAGE = {
+        '1-8':  '⅛W',
+        '1-4':  '¼W',
+        '1-2':  '½W',
     };
 
 
@@ -65,6 +70,17 @@ function Y(y) {
     y = Math.min(y, CONFIG.pageHeight - 1);
     y = Math.max(y, 1);
     return y;
+}
+
+
+function wattageUI(watt) {
+    if (! watt) {
+        return '';
+    }
+    if (UI_WATTAGE[watt]) {
+        return UI_WATTAGE[watt];
+    }
+    return parseInt(watt, 10) + 'W';
 }
 
 
@@ -156,6 +172,7 @@ function resistors(req, res, next) {
     tmpl.config.digits      = tmpl.config.bands -2;
     tmpl.config.tolerance   = config.t;
     tmpl.config.tol         = COLORS_TOLERANCE[config.t];
+    tmpl.config.watt        = wattageUI(config.w);
 
     for (d = 0; d < tmpl.config.digits; d++) {
         tmpl.digits[d] = d;

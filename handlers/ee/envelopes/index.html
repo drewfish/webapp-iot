@@ -11,6 +11,7 @@
         padding:0.5em 1em;
         vertical-align: top;
     }
+    label { padding-right: 1em; }
     #res-values { width: 30em; height: 4em; }
     .centered { text-align: center; }
     #license {
@@ -23,12 +24,16 @@ function resistors() {
     var form = document.forms.res,
         bands = form.bands.value || 4,
         tol = form.tol.value || 'n',
+        watt = form.watt.value || 'n',
         vals = form.vals.value || '',
         url = '/ee/envelopes/resistors/',
         errs = [];
     url += 'b=' + encodeURIComponent(bands);
     if (tol !== 'n') {
         url += '&t=' + encodeURIComponent(tol);
+    }
+    if (watt !== 'n') {
+        url += '&w=' + encodeURIComponent(watt);
     }
     vals = vals.replace(/[^0-9rkm.]/gi, ',');
     vals = vals.replace(/,+/g, ',').replace(/^,+/, '').replace(/,+$/, '');
@@ -86,6 +91,17 @@ function resistors() {
                     <td>
                         <label for="res-bands-4"><input id="res-bands-4" type="radio" name="bands" value="4" checked> 4</label>
                         <label for="res-bands-5"><input id="res-bands-5" type="radio" name="bands" value="5"> 5</label>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>wattage</th>
+                    <td>
+                        <label for="res-watt-n"><input id="res-watt-n" type="radio" name="watt" value="n" checked> none</label>
+                        <label for="res-watt-1-8"><input id="res-watt-1-8" type="radio" name="watt" value="1-8"> ⅛W</label>
+                        <label for="res-watt-1-4"><input id="res-watt-1-4" type="radio" name="watt" value="1-4"> ¼W</label>
+                        <label for="res-watt-1-2"><input id="res-watt-1-2" type="radio" name="watt" value="1-2"> ½W</label>
+                        <label for="res-watt-1"><input id="res-watt-1" type="radio" name="watt" value="1"> 1W</label>
                     </td>
                     <td></td>
                 </tr>
