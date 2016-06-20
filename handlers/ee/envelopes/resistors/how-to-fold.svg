@@ -209,24 +209,24 @@
                 <line class="fold" x1="1" x2="399" y1="100" y2="100" />
                 <line class="fold" x1="1" x2="399" y1="200" y2="200" />
                 <g class="envelope">
-                    <text class="leaf1" x="322.5" y="200" font-size="24pt" transform="rotate(180 322.5,188)">1M<tspan font-size="12pt">Ω 5%</tspan></text>
-                    <text class="leaf2" x="322.5" y="224" font-size="24pt">1M<tspan font-size="12pt">Ω 5%</tspan></text>
-                    <use x="77.5" y="185" xlink:href="#vbar-Bn"></use>
-                    <use x="22.5" y="130" xlink:href="#hbar-Bn"></use>
-                    <use x="22.5" y="265" xlink:href="#hbar-Bn"></use>
-                    <use x="130" y="35.5" xlink:href="#box-digit-Bn"></use>
-                    <use x="87.5" y="185" xlink:href="#vbar-Bk"></use>
-                    <use x="22.5" y="140" xlink:href="#hbar-Bk"></use>
-                    <use x="22.5" y="255" xlink:href="#hbar-Bk"></use>
-                    <use x="165" y="35.5" xlink:href="#box-digit-Bk"></use>
-                    <use x="97.5" y="185" xlink:href="#vbar-Gn"></use>
-                    <use x="22.5" y="150" xlink:href="#hbar-Gn"></use>
-                    <use x="22.5" y="245" xlink:href="#hbar-Gn"></use>
-                    <use x="200" y="35.5" xlink:href="#box-multiplier-Gn"></use>
-                    <use x="112.5" y="185" xlink:href="#vbar-Gd"></use>
-                    <use x="22.5" y="165" xlink:href="#hbar-Gd"></use>
-                    <use x="22.5" y="230" xlink:href="#hbar-Gd"></use>
-                    <use x="240" y="35.5" xlink:href="#box-tolerance-Gd"></use>
+                    <text class="leaf1" x="322.5" y="200" font-size="24pt" transform="rotate(180 322.5,188)">10k<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <text class="leaf2" x="322.5" y="224" font-size="24pt">10k<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <use x="77.5" y="185" xlink:href="#vbar-Bn" />
+                    <use x="22.5" y="130" xlink:href="#hbar-Bn" />
+                    <use x="22.5" y="265" xlink:href="#hbar-Bn" />
+                    <use x="130" y="35.5" xlink:href="#box-digit-Bn" />
+                    <use x="87.5" y="185" xlink:href="#vbar-Bk" />
+                    <use x="22.5" y="140" xlink:href="#hbar-Bk" />
+                    <use x="22.5" y="255" xlink:href="#hbar-Bk" />
+                    <use x="165" y="35.5" xlink:href="#box-digit-Bk" />
+                    <use x="97.5" y="185" xlink:href="#vbar-Og" />
+                    <use x="22.5" y="150" xlink:href="#hbar-Og" />
+                    <use x="22.5" y="245" xlink:href="#hbar-Og" />
+                    <use x="200" y="35.5" xlink:href="#box-multiplier-Og" />
+                    <use x="112.5" y="185" xlink:href="#vbar-Gd" />
+                    <use x="22.5" y="165" xlink:href="#hbar-Gd" />
+                    <use x="22.5" y="230" xlink:href="#hbar-Gd" />
+                    <use x="240" y="35.5" xlink:href="#box-tolerance-Gd" />
                 </g>
             </svg>
         </symbol>
