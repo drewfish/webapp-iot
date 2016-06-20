@@ -11,7 +11,6 @@
         <style><![CDATA[
             text {
                 font-family: Arial, sans-serif;
-                text-anchor: middle;
             }
             symbol {
                 overflow: visible;
@@ -47,10 +46,14 @@
             rect.Gd { fill: #E0D000; stroke: #AAAAAA; }
             rect.Sr { fill: #DDDDDD; stroke: #AAAAAA; }
             symbol.box rect { stroke-width: 2; }
+            symbol.box text { text-anchor: middle; }
             symbol.box.Bk text { fill: #BBBBBB; stroke: none; }
             symbol.box.Bn text { fill: #BBBBBB; stroke: none; }
             symbol.box.Bl text { fill: #BBBBBB; stroke: none; }
             symbol.box.multiplier tspan { baseline-shift: 4pt; }
+            text.leaf1 { text-anchor: begin; }
+            text.leaf2 { text-anchor: end; }
+            .envelope text tspan { baseline-shift: 8pt; }
             rect.paper {
                 fill: #FFF;
                 stroke: #000;
@@ -206,8 +209,8 @@
                 <line class="fold" x1="1" x2="399" y1="100" y2="100" />
                 <line class="fold" x1="1" x2="399" y1="200" y2="200" />
                 <g class="envelope">
-                    <text x="200" y="160" font-size="24pt" transform="rotate(180 200,150)">1M<tspan font-size="12pt">Ω 5%</tspan></text>
-                    <text x="200" y="260" font-size="24pt">1M<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <text class="leaf1" x="322.5" y="200" font-size="24pt" transform="rotate(180 322.5,188)">1M<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <text class="leaf2" x="322.5" y="224" font-size="24pt">1M<tspan font-size="12pt">Ω 5%</tspan></text>
                     <use x="77.5" y="185" xlink:href="#vbar-Bn"></use>
                     <use x="22.5" y="130" xlink:href="#hbar-Bn"></use>
                     <use x="22.5" y="265" xlink:href="#hbar-Bn"></use>

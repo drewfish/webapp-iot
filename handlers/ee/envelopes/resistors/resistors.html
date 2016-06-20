@@ -15,7 +15,6 @@
         <style><![CDATA[
             text {
                 font-family: Arial, sans-serif;
-                text-anchor: middle;
             }
             symbol {
                 overflow: visible;
@@ -51,10 +50,14 @@
             rect.Gd { fill: #E0D000; stroke: #AAAAAA; }
             rect.Sr { fill: #DDDDDD; stroke: #AAAAAA; }
             symbol.box rect { stroke-width: 2; }
+            symbol.box text { text-anchor: middle; }
             symbol.box.Bk text { fill: #BBBBBB; stroke: none; }
             symbol.box.Bn text { fill: #BBBBBB; stroke: none; }
             symbol.box.Bl text { fill: #BBBBBB; stroke: none; }
             symbol.box.multiplier tspan { baseline-shift: 4pt; }
+            text.leaf1 { text-anchor: begin; }
+            text.leaf2 { text-anchor: end; }
+            .envelope text tspan { baseline-shift: 8pt; }
         ]]></style>
 
         <symbol id="hbar-Sr"><rect class="bar Sr" x="0" y="0" width="30" height="5" rx="2" ry="2"/></symbol>
@@ -223,8 +226,8 @@
 {{~page.envelopes :env:e}}
 <!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}}{{? it.config.watt}},{{!it.config.watt}}{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
     <g id="envelope-{{=p}}-{{=env.col}}-{{=env.row}}" class="envelope">
-        <text x="{{=env.leaf1cx}}" y="{{=env.leaf1cy + 10}}" font-size="24pt" transform="rotate(180 {{=env.leaf1cx}},{{=env.leaf1cy}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>
-        <text x="{{=env.leaf2cx}}" y="{{=env.leaf2cy + 10}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>{{~it.digits :off:d}}
+        <text class="leaf1" x="{{=env.leaf1E - it.config.barMargin}}" y="{{=env.leaf1S}}" font-size="24pt" transform="rotate(180 {{=env.leaf1E - it.config.barMargin}},{{=env.leaf1S - 12}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>
+        <text class="leaf2" x="{{=env.leaf2E - it.config.barMargin}}" y="{{=env.leaf2N + 24}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>{{~it.digits :off:d}}
         <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
