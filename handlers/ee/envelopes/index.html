@@ -12,7 +12,11 @@
         vertical-align: top;
     }
     #res-values { width: 30em; height: 4em; }
-    .spanned { text-align: center; }
+    .centered { text-align: center; }
+    #license {
+        margin-top: 10em;
+        font-size: 7pt;
+    }
 </style>
 <script>
 function resistors() {
@@ -98,18 +102,18 @@ function resistors() {
             </table>
         </td>
     </tr>
-    <tr class="spanned">
+    <tr class="centered">
         <td>
             <button class="pure-button pure-button-primary" type="submit">draw</button>
         </td>
     </tr>
-    <tr class="spanned">
+    <tr class="centered">
         <td>
             print so that each image (of 6 envelopes) is printed on a separate page<br>
             (hopefully this happens automatically)
         </td>
     </tr>
-    <tr class="spanned">
+    <tr class="centered">
         <td>
             cut on black lines<br>
             fold on grey lines<br>
@@ -119,6 +123,13 @@ function resistors() {
 </table>
 </form>
 
+
+<p id="license" xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+    <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="https://licensebuttons.net/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0" /></a>
+    To the extent possible under law, <span resource="[_:publisher]" rel="dct:publisher"><span property="dct:title">Drew Folta</span></span>
+    has waived all copyright and related or neighboring rights to <span property="dct:title">ee envelopes</span>.
+    This work is published from: <span property="vcard:Country" datatype="dct:ISO3166" content="US" about="[_:publisher]">United States</span>.
+</p>
 
 </body>
 </html>
