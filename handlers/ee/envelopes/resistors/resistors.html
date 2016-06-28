@@ -226,8 +226,8 @@
 {{~page.envelopes :env:e}}
 <!-- envelope {{=env.col}},{{=env.row}} {{=env.ui.val}}{{? it.config.tolerance}},{{=it.config.tolerance}}%{{?}}{{? it.config.watt}},{{!it.config.watt}}{{?}} {{=env.ui.digits}},{{=env.ui.mult}}{{? it.config.tol}},{{=it.config.tol}}{{?}} -->
     <g id="envelope-{{=p}}-{{=env.col}}-{{=env.row}}" class="envelope">
-        <text class="leaf1" x="{{=env.leaf1E - it.config.barMargin}}" y="{{=env.leaf1S}}" font-size="24pt" transform="rotate(180 {{=env.leaf1E - it.config.barMargin}},{{=env.leaf1S - 12}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>
-        <text class="leaf2" x="{{=env.leaf2E - it.config.barMargin}}" y="{{=env.leaf2N + 24}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>{{~it.digits :off:d}}
+        <text class="leaf1" x="{{=env.leaf1E - it.config.barMargin}}" y="{{=env.leaf1S - 4}}" font-size="24pt" transform="rotate(180 {{=env.leaf1E - it.config.barMargin}},{{=env.leaf1S - 16}})">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>
+        <text class="leaf2" x="{{=env.leaf2E - it.config.barMargin}}" y="{{=env.leaf2N + 28}}" font-size="24pt">{{=env.ui.val}}<tspan font-size="12pt">Ω{{? it.config.tolerance}} {{=it.config.tolerance}}%{{?}}{{? it.config.watt}} {{!it.config.watt}}{{?}}</tspan></text>{{~it.digits :off:d}}
         <use x="{{=env.leaf2W + it.config.barMargin + it.vbars.W.digits[d]}}" y="{{=env.leaf2N - 15}}" xlink:href="#vbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf1W - 15}}" y="{{=env.leaf1cy + it.hbars.leaf1.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
         <use x="{{=env.leaf2W - 15}}" y="{{=env.leaf2cy + it.hbars.leaf2.digits[d]}}" xlink:href="#hbar-{{=env.ui.digits[d]}}" />
