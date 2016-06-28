@@ -117,19 +117,6 @@ function envelopeUI(val, config) {
 }
 
 
-function index(req, res, next) {
-    res.sendFile('index.html', {
-        root:       __dirname,
-//TODO  maxAage:    (24 * 60 * 60 * 1000),  // one day in milliseconds
-    }, function(err) {
-        if (err) {
-            console.error(err.stack);
-            res.status(err.status).end();
-        }
-    });
-}
-
-
 function resistors(req, res, next) {
     var config = LIBS.qs.parse(req.params.config),
         vals = req.params.values.split(','),
