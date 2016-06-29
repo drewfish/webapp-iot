@@ -206,125 +206,129 @@
             <svg width="100" height="75" viewBox="0 0 400 300">
                 <line class="fold" x1="37.5" x2="37.5" y1="1" y2="299" />
                 <line class="fold" x1="362.5" x2="362.5" y1="1" y2="299" />
-                <line class="fold" x1="1" x2="399" y1="100" y2="100" />
-                <line class="fold" x1="1" x2="399" y1="200" y2="200" />
+                <line class="fold" x1="1" x2="399" y1="90" y2="90" />
+                <line class="fold" x1="1" x2="399" y1="190" y2="190" />
                 <g class="envelope">
-                    <text class="leaf1" x="322.5" y="200" font-size="24pt" transform="rotate(180 322.5,188)">10k<tspan font-size="12pt">Ω 5%</tspan></text>
-                    <text class="leaf2" x="322.5" y="224" font-size="24pt">10k<tspan font-size="12pt">Ω 5%</tspan></text>
-                    <use x="77.5" y="185" xlink:href="#vbar-Bn" />
-                    <use x="22.5" y="130" xlink:href="#hbar-Bn" />
-                    <use x="22.5" y="265" xlink:href="#hbar-Bn" />
-                    <use x="130" y="35.5" xlink:href="#box-digit-Bn" />
-                    <use x="87.5" y="185" xlink:href="#vbar-Bk" />
-                    <use x="22.5" y="140" xlink:href="#hbar-Bk" />
-                    <use x="22.5" y="255" xlink:href="#hbar-Bk" />
-                    <use x="165" y="35.5" xlink:href="#box-digit-Bk" />
-                    <use x="97.5" y="185" xlink:href="#vbar-Og" />
-                    <use x="22.5" y="150" xlink:href="#hbar-Og" />
-                    <use x="22.5" y="245" xlink:href="#hbar-Og" />
-                    <use x="200" y="35.5" xlink:href="#box-multiplier-Og" />
-                    <use x="112.5" y="185" xlink:href="#vbar-Gd" />
-                    <use x="22.5" y="165" xlink:href="#hbar-Gd" />
-                    <use x="22.5" y="230" xlink:href="#hbar-Gd" />
-                    <use x="240" y="35.5" xlink:href="#box-tolerance-Gd" />
+                    <text class="leaf1" x="322.5" y="186" font-size="24pt" transform="rotate(180 322.5,174)">10k<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <text class="leaf2" x="322.5" y="218" font-size="24pt">10k<tspan font-size="12pt">Ω 5%</tspan></text>
+                    <use x="77.5" y="175" xlink:href="#vbar-Bn" />
+                    <use x="22.5" y="120" xlink:href="#hbar-Bn" />
+                    <use x="22.5" y="255" xlink:href="#hbar-Bn" />
+                    <use x="130" y="30.5" xlink:href="#box-digit-Bn" />
+                    <use x="87.5" y="175" xlink:href="#vbar-Bk" />
+                    <use x="22.5" y="130" xlink:href="#hbar-Bk" />
+                    <use x="22.5" y="245" xlink:href="#hbar-Bk" />
+                    <use x="165" y="30.5" xlink:href="#box-digit-Bk" />
+                    <use x="97.5" y="175" xlink:href="#vbar-Og" />
+                    <use x="22.5" y="140" xlink:href="#hbar-Og" />
+                    <use x="22.5" y="235" xlink:href="#hbar-Og" />
+                    <use x="200" y="30.5" xlink:href="#box-multiplier-Og" />
+                    <use x="112.5" y="175" xlink:href="#vbar-Gd" />
+                    <use x="22.5" y="155" xlink:href="#hbar-Gd" />
+                    <use x="22.5" y="220" xlink:href="#hbar-Gd" />
+                    <use x="240" y="30.5" xlink:href="#box-tolerance-Gd" />
                 </g>
             </svg>
         </symbol>
         <symbol id="envelope-leaf0">
             <clipPath id="envelope-clip-leaf0">
-                <rect x="9.375" y="0" width="81.25" height="25" />
+                <rect x="9.375" y="0" width="81.25" height="22.5" />
             </clipPath>
-            <rect class="paper" x="0" y="0" width="81.25" height="25" />
+            <rect class="paper" x="0" y="0" width="81.25" height="22.5" />
             <use x="0" y="0" transform="translate(-9.375 0)" clip-path="url(#envelope-clip-leaf0)" xlink:href="#envelope" />
         </symbol>
         <symbol id="envelope-leaf0-full">
             <clipPath id="envelope-clip-leaf0-full">
-                <rect x="0" y="0" width="100" height="25" />
+                <rect x="0" y="0" width="100" height="22.5" />
             </clipPath>
-            <rect class="paper" x="0" y="0" width="100" height="25" />
+            <rect class="paper" x="0" y="0" width="100" height="22.5" />
             <use x="0" y="0" clip-path="url(#envelope-clip-leaf0-full)" xlink:href="#envelope" />
         </symbol>
         <symbol id="envelope-leaf2">
             <clipPath id="envelope-clip-leaf2">
-                <rect x="9.375" y="50" width="81.25" height="25" />
+                <rect x="9.375" y="47.5" width="81.25" height="27.5" />
             </clipPath>
-            <rect class="paper" x="0" y="0" width="81.25" height="25" />
-            <use x="0" y="0" transform="translate(-9.375 -50)" clip-path="url(#envelope-clip-leaf2)" xlink:href="#envelope" />
+            <rect class="paper" x="0" y="0" width="81.25" height="27.5" />
+            <use x="0" y="0" transform="translate(-9.375 -47.5)" clip-path="url(#envelope-clip-leaf2)" xlink:href="#envelope" />
         </symbol>
         <symbol id="envelope-bside-leaf12">
-            <rect class="paper" x="0" y="0" width="81.25" height="50" />
+            <rect class="paper" x="0" y="0" width="81.25" height="52.5" />
         </symbol>
         <symbol id="envelope-bside-leaf12-full">
-            <rect class="paper" x="0" y="0" width="100" height="50" />
+            <rect class="paper" x="0" y="0" width="100" height="52.5" />
         </symbol>
-        <symbol id="envelope-rfold2">
-            <clipPath id="envelope-clip-rfold2">
-                <rect x="90.625" y="50" width="9.375" height="25" />
+        <symbol id="envelope-lfold1">
+            <clipPath id="envelope-clip-lfold1">
+                <rect x="0" y="22.5" width="9.375" height="25" />
             </clipPath>
             <rect class="paper" x="0" y="0" width="9.375" height="25" />
-            <use x="0" y="0" transform="translate(-90.625 -50)" clip-path="url(#envelope-clip-rfold2)" xlink:href="#envelope" />
+            <use x="0" y="0" transform="translate(0 -22.5)" clip-path="url(#envelope-clip-lfold1)" xlink:href="#envelope" />
         </symbol>
         <symbol id="envelope-lfold12">
             <clipPath id="envelope-clip-lfold12">
-                <rect x="0" y="25" width="9.375" height="50" />
+                <rect x="0" y="25" width="9.375" height="52.5" />
             </clipPath>
-            <rect class="paper" x="0" y="0" width="9.375" height="50" />
-            <line class="fold" x1="0" x2="9.375" y1="25" y2="25" />
-            <use x="0" y="0" transform="translate(0 -25)" clip-path="url(#envelope-clip-lfold12)" xlink:href="#envelope" />
+            <rect class="paper" x="0" y="0" width="9.375" height="52.5" />
+            <line class="fold" x1="0" x2="9.375" y1="22.5" y2="22.5" />
+            <use x="0" y="0" transform="translate(0 -22.5)" clip-path="url(#envelope-clip-lfold12)" xlink:href="#envelope" />
         </symbol>
         <symbol id="envelope-rfold12">
             <clipPath id="envelope-clip-rfold12">
-                <rect x="90.625" y="25" width="9.375" height="50" />
+                <rect x="90.625" y="25" width="9.375" height="52.5" />
             </clipPath>
-            <rect class="paper" x="0" y="0" width="9.375" height="50" />
-            <line class="fold" x1="0" x2="9.375" y1="25" y2="25" />
-            <use x="0" y="0" transform="translate(-90.625 -25)" clip-path="url(#envelope-clip-rfold12)" xlink:href="#envelope" />
+            <rect class="paper" x="0" y="0" width="9.375" height="52.5" />
+            <line class="fold" x1="0" x2="9.375" y1="22.5" y2="22.5" />
+            <use x="0" y="0" transform="translate(-90.625 -22.5)" clip-path="url(#envelope-clip-rfold12)" xlink:href="#envelope" />
         </symbol>
     </defs>
 
     <rect class="background" x="0" y="0" width="480" height="95" />
     <use x="10" y="10" xlink:href="#envelope" />
-    <g id="instructions-step1" x="130" y="10" transform="rotate(-10 180,47.5)">
-        <use x="0" y="0" transform="
-                translate(130 22.5)
-            " xlink:href="#envelope-bside-leaf12-full" />
-        <use x="0" y="0" transform="
-                translate(145 47.5)
+    <g id="instructions-step1" x="130" y="10" width="100" height="75" transform="
+        rotate(-10 180,47.5)
+        translate(130 10)
+        ">
+        <use x="0" y="11.25" width="100" height="52.5" xlink:href="#envelope-bside-leaf12-full" />
+        <use x="0" y="0" width="100" height="22.5" transform="
+                scale(1 0.9)
                 skewX(-30)
+                translate(41 48.5)
             " xlink:href="#envelope-leaf0-full" />
     </g>
-    <g id="instructions-step2"
-    transform="rotate(-10 300,47.5)"
-    >
-        <use x="0" y="0" transform="
-                translate(259.375 22.5)
-            " xlink:href="#envelope-bside-leaf12" />
-        <use x="0" y="0" transform="
-                translate(259.375 47.5)
-            " xlink:href="#envelope-leaf0" />
-        <use x="0" y="0" transform="
-                translate(259.375 22.5)
-                rotate(180 4.6875,25)
-                skewY(30)
-                scale(0.9 1)
-                translate(1.1 -5.4)
+    <g id="instructions-step2" x="250" y="10" width="100" height="75" transform="
+        rotate(-10 300,47.5)
+        translate(250 10)
+        ">
+        <use x="9.375" y="11.25" width="81.25" height="52.5" xlink:href="#envelope-bside-leaf12" />
+        <use x="9.375" y="41.25" xlink:href="#envelope-leaf0" />
+        <use x="9.375" y="11.25" width="9.375" height="52.5" transform="
+            rotate(180 14.0625,37.5)
+            skewY(30)
+            scale(0.9 1)
+            translate(2 -11)
             " xlink:href="#envelope-lfold12" />
-        <use x="0" y="0" transform="
-                translate(332.25 27.5)
-                rotate(180 4.6875,25)
+        <use x="81.25" y="11.25" transform="
+                rotate(180 85.9375,37.5)
                 skewY(-30)
                 scale(0.9 1)
-                translate(1.1 5.4)
+                translate(9 46.7)
             " xlink:href="#envelope-rfold12" />
     </g>
-    <g id="instructions-step3" transform="rotate(-10 420,47.5)">
+    <g id="instructions-step3" x="370" y="10" width="100" height="75" transform="
+        rotate(-10 420,47.5)
+        translate(370 10)
+        ">
         <use x="0" y="0" transform="
-                translate(379.375 35)
-                skewX(-20)
-                scale(1 0.9)
-            " xlink:href="#envelope-rfold2" />
+            rotate(180 14.0625,50)
+            translate(18.75 37.5)
+            skewX(-20)
+            " xlink:href="#envelope-lfold1" />
+        <rect x="0" y="0" width="9.375" height="25" transform="
+            translate(9.375 37.5)
+            skewX(-20)
+            " fill="#000" fill-opacity="0.2" />
         <use x="0" y="0" transform="
-                translate(379.375 35)
+            translate(9.375 37.5)
             " xlink:href="#envelope-leaf2" />
     </g>
 
