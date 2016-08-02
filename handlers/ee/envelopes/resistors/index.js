@@ -19,7 +19,6 @@ var ME = module.exports,
         barPadding:       5,
         boxSize:         30,
         boxPadding:       5,
-        leafShift:       10,
     },
     COLORS_DIGIT = {
         '0':    'Bk',
@@ -192,9 +191,9 @@ function resistors(req, res, next) {
         env.W = X(W);
         for (leaf = 0; leaf < 3; leaf++) {
             name = 'leaf' + leaf;
-            env[name + 'N'] = Y(N + ((leaf + 0) * CONFIG.foldHeight) - CONFIG.leafShift);
+            env[name + 'N'] = Y(N + ((leaf + 0) * CONFIG.foldHeight));
             env[name + 'E'] = X(E - CONFIG.foldWidth);
-            env[name + 'S'] = Y(N + ((leaf + 1) * CONFIG.foldHeight) - CONFIG.leafShift);
+            env[name + 'S'] = Y(N + ((leaf + 1) * CONFIG.foldHeight));
             env[name + 'W'] = X(W + CONFIG.foldWidth);
             env[name + 'cx'] = X((env[name + 'E'] + env[name + 'W']) / 2);
             env[name + 'cy'] = Y((env[name + 'N'] + env[name + 'S']) / 2);
