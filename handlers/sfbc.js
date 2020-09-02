@@ -54,7 +54,7 @@ var LIBS = {
 // make & return the singleton
 function getAuthClient(req) {
     if (! GOOGLEAPI_AUTH_CLIENT) {
-        GOOGLEAPI_AUTH_CLIENT = new LIBS.google.auth.JWT(
+        GOOGLEAPI_AUTH_CLIENT = new LIBS.google.google.auth.JWT(
             CONFIG.SFBC_GA_EMAIL,
             GOOGLEAPI_KEY_FILE,
             null,
@@ -108,7 +108,7 @@ function authorize(req, res, next) {
 //          }
 //      }
 function events(req, res, next) {
-    var api = LIBS.google.calendar('v3'),
+    var api = LIBS.google.google.calendar('v3'),
         authClient = getAuthClient(req),
         now = Date.now(),
         events = [];
@@ -126,7 +126,7 @@ function events(req, res, next) {
                 calDone(err);
                 return;
             }
-            body.items.forEach(function(event) {
+            body.data.items.forEach(function(event) {
                 var location = cal.defaultLocation;
                 EVENT_FILTERS.forEach(function(filter) {
                     var val = event[filter.field];
@@ -138,7 +138,7 @@ function events(req, res, next) {
                 event.sfbc = {};
                 event.sfbc.location = location;
             });
-            events = events.concat(body.items);
+            events = events.concat(body.data.items);
             calDone();
         });
     }, function(err) {
