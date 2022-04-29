@@ -7,7 +7,7 @@
         "node": "8.11.2"
     },
     "dependencies": {
-        "async": "^1.4.2",
+        "async": "^2.6.4",
         "dot": "^1.0.3",
         "express": "^4.17.1",
         "googleapis": "^59.0.0",
