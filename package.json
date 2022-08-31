@@ -11,7 +11,7 @@
         "dot": "^1.0.3",
         "express": "^4.17.1",
         "googleapis": "^59.0.0",
-        "moment-timezone": "^0.4.0"
+        "moment-timezone": "^0.5.35"
     },
     "scripts": {
         "start": "node app.js"
